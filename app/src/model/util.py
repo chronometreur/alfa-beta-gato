@@ -28,3 +28,24 @@ class SingletonMeta(type):
 class Singleton(metaclass=SingletonMeta):
     def __getattr__(self, item):
         return getattr(self.__dict__, item)
+
+
+# Fabrica. La idea era generar el nombre de la clase en una string como en PHP, pero creo que en Python no se puede
+# Lo que voy a hacer es registrar todos mis creadores, cada uno especializado en una subclase
+class Factory(metaclass=Singleton):
+    def __init__(self):
+        self._objects = {}
+
+    # en mi app.py principal voy a tener varios register_creator: factory.register_creator('algo', Clase)
+    def register_creator(self, key, creator):
+        self._objects[key] = creator
+
+    def get_object(self, key):
+        object = self._objects.get(key)
+
+        if not object:
+            # puedo personalizar el mensaje?
+            raise ValueError(key)
+
+        # regreso una instancia
+        return object()
