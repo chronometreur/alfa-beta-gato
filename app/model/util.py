@@ -1,7 +1,7 @@
 """
 Paquete de clases de utilerias
 """
-from threading import Lock, Thread
+from threading import Lock
 
 
 # Implementacion del singleton con el metodo de la meta clase. Queda por descubrir por que el singleton ya no se usa en
@@ -32,7 +32,7 @@ class Singleton(metaclass=SingletonMeta):
 
 # Fabrica. La idea era generar el nombre de la clase en una string como en PHP, pero creo que en Python no se puede
 # Lo que voy a hacer es registrar todos mis creadores, cada uno especializado en una subclase
-class Factory(metaclass=Singleton):
+class Factory(Singleton, metaclass=SingletonMeta):
     def __init__(self):
         self._objects = {}
 
