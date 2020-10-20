@@ -8,5 +8,5 @@ Ejecutamos la aplicacion
 """
 if __name__ == "__main__":
     # 1. Creo mi singleton de configuracion
-    config = Config(value='config/parameters.yml')
-    print(config)
+    config = Config('config/config.yml')
+    print(config.view)
