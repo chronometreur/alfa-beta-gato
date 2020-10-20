@@ -41,11 +41,11 @@ class Factory(metaclass=Singleton):
         self._objects[key] = creator
 
     def get_object(self, key):
-        object = self._objects.get(key)
+        thing = self._objects.get(key)
 
-        if not object:
+        if not thing:
             # puedo personalizar el mensaje?
             raise ValueError(key)
 
         # regreso una instancia
-        return object()
+        return thing()
