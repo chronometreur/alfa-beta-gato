@@ -1,7 +1,6 @@
 """
 Paquete de clases de utilerias
 """
-import app.view.front
 import importlib
 from threading import Lock
 
@@ -39,9 +38,9 @@ class Factory(Singleton, metaclass=SingletonMeta):
     def get_object(self, key):
         key = 'app.' + key
         point = key.rfind('.')
-        m = key[:point]
-        c = key[point + 1:].capitalize()
-        module = importlib.import_module(m)
-        declaration = getattr(module, c)
+        m = key[:point]  # nombre del modulo
+        c = key[point + 1:].capitalize()  # nombre de la clase
+        module = importlib.import_module(m)  # modulo
+        declaration = getattr(module, c)  # clase
 
         return declaration()
