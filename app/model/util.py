@@ -1,6 +1,8 @@
 """
 Paquete de clases de utilerias
 """
+import app.view.front
+import importlib
 from threading import Lock
 
 
@@ -33,19 +35,13 @@ class Singleton(metaclass=SingletonMeta):
 # Fabrica. La idea era generar el nombre de la clase en una string como en PHP, pero creo que en Python no se puede
 # Lo que voy a hacer es registrar todos mis creadores, cada uno especializado en una subclase
 class Factory(Singleton, metaclass=SingletonMeta):
-    def __init__(self):
-        self._objects = {}
-
-    # en mi app.py principal voy a tener varios register_creator: factory.register_creator('algo', Clase)
-    def register_creator(self, key, creator):
-        self._objects[key] = creator
-
+    # Metodo creador
     def get_object(self, key):
-        thing = self._objects.get(key)
+        key = 'app.' + key
+        point = key.rfind('.')
+        m = key[:point]
+        c = key[point + 1:].capitalize()
+        module = importlib.import_module(m)
+        declaration = getattr(module, c)
 
-        if not thing:
-            # puedo personalizar el mensaje?
-            raise ValueError(key)
-
-        # regreso una instancia
-        return thing()
+        return declaration()
