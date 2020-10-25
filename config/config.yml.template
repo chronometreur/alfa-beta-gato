@@ -1,4 +1,7 @@
 # copia este archivo a config.yml
-adversary: cpu
-size: 3
-view: turtle
+opponent:
+  strategy: algo
+view:
+  interface: pygame
+  length: 800
+  width: 600

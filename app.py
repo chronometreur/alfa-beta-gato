@@ -13,5 +13,6 @@ if __name__ == "__main__":
     factory = Factory()
 
     # 2. Obtengo mi front
-    front = factory.get_object('view.front.{}'.format(config.view))    # mayuscula la ultima parte
-    front.board(config.size)
+    front = factory.get_object('view.front.{}'.format(config.view['interface']))
+    front.init(config.view)
+    #print(config.view['interface'])
